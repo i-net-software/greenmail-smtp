@@ -12,7 +12,7 @@ Mail clients, such as the WEBMAIL service can authenticate with these credential
 Usage :
 
 ```bash
-git clone https://github.com/inetsoftware/greenmail-smtp.git
+git clone https://github.com/i-net-software/greenmail-smtp.git
 cd greenmail-smtp/
 # docker-compose build # (optional step)
 docker-compose up
