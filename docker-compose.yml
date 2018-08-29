@@ -1,30 +1,32 @@
 version: "2"
 volumes:
-  mailbox:
   sqlite:
 services:
-  smtp-sink:
-    build: smtp-sink/
-    image: camptocamp/smtp-sink
-    ports:
-      - "2525:25"
-    volumes:
-      - mailbox:/home/smtp/Maildir/
 
-  courier-imap:
-    build: courier-imap/
-    image: camptocamp/courier-imap
+  greenmail:
+    image: greenmail/standalone
     ports:
-      - "143:143"
-    volumes:
-      - mailbox:/home/smtp/Maildir/
+# - smtp  : 3025
+      - "25:3025"
+# - smtps : 3465
+#      - "3465:3465"
+# - pop3  : 3110
+#      - "3110:3110"
+# - pop3s : 3995
+#      - "3995:3995"
+# - imap  : 3143
+      - "143:3143"
+# - imaps : 3993
+#      - "3993:3993"
 
   webmail:
     build: webmail/
-    image: camptocamp/roundcube
+    image: inetsoftware/roundcube
     environment:
-      - IMAP_HOSTNAME=courier-imap
-      - SMTP_HOSTNAME=smtp-sink
+      - IMAP_HOSTNAME=greenmail
+      - IMAP_PORT=3143
+      - SMTP_HOSTNAME=greenmail
+      - SMTP_PORT=3025
     ports:
       - "8080:80"
     volumes:

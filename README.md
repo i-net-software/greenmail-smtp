@@ -1,18 +1,19 @@
-# docker_smtp
-A simple docker image with SMTP, IMAP and a webmail. This composition is dedicated to development environements because it will accept all emails and never relay to internet. 
+# greenmail smtp
+A simple docker image with SMTP, IMAP and a webmail based up on greenmail and docker_smtp. This composition is dedicated to development environements because it will accept all emails and never relay to internet. 
 
-This composition will launch 3 services in 3 images:
-* SMTP service on port 25, run by `smtp-sink`
-* IMAP service on port 143, run by `courier-imap` (User : **smtp**, password: **smtp**)
+This composition will launch 2 services in 2 images:
 * WEBMAIL service on port *8080*, run by `apache2` and `roundcube` at http://127.0.0.1:8080/webmail/
+* SMTP+s, IMAP+s (and if needed POP3+s) services, run by `greenmail`
 
-SMTP will accept all emails and store every emails receive on port 25 to only one mailbox. This mailbox can be read with a webmail available on port 8080 or with IMAP protocol available on standard port 143.
+SMTP will accept all emails and creates separate accounts for each mail received. The username and password are set to the email address of the created account.
+
+Mail clients, such as the WEBMAIL service can authenticate with these credentials to check on the mails.
 
 Usage :
 
 ```bash
-git clone https://github.com/camptocamp/docker_smtp.git
-cd docker_smtp/
+git clone https://github.com/inetsoftware/greenmail-smtp.git
+cd greenmail-smtp/
 # docker-compose build # (optional step)
 docker-compose up
 ```

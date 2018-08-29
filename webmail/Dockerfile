@@ -10,12 +10,10 @@ RUN cd /var/www/html/ \
   && chown -R www-data:www-data webmail/ \
   && rm -fr /var/www/html/webmail/installer
 COPY config.inc.php /var/www/html/webmail/config/config.inc.php
-COPY autologon.php /var/www/html/webmail/plugins/autologon/autologon.php
+# COPY autologon.php /var/www/html/webmail/plugins/autologon/autologon.php
 COPY index.html /var/www/html/
 RUN mkdir -p /mnt/sqlite/roundcube \
   && chown -R www-data /mnt/sqlite/roundcube
 VOLUME /mnt/sqlite
 EXPOSE 80
 CMD /bin/bash -c "source /etc/apache2/envvars && apache2 -D FOREGROUND"
-
-

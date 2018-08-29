@@ -29,6 +29,7 @@ $config['db_dsnw'] = 'sqlite:////mnt/sqlite/roundcube/roundcube.sqlite?mode=0646
 // WARNING: After hostname change update of mail_host column in users table is
 //          required to match old user data records with the new host.
 $config['default_host'] = getenv("IMAP_HOSTNAME");
+$config['default_port'] = getenv("IMAP_PORT");
 
 // ----------------------------------
 // SMTP
@@ -44,6 +45,7 @@ $config['default_host'] = getenv("IMAP_HOSTNAME");
 // %z - IMAP domain (IMAP hostname without the first part)
 // For example %n = mail.domain.tld, %t = domain.tld
 $config['smtp_server'] = getenv("SMTP_HOSTNAME");
+$config['smtp_port'] = getenv("SMTP_PORT");
 
 // provide an URL where a user can get support for this Roundcube installation
 // PLEASE DO NOT LINK TO THE ROUNDCUBE.NET WEBSITE HERE!
@@ -61,7 +63,7 @@ $config['product_name'] = 'Roundcube Webmail';
 // PLUGINS
 // ----------------------------------
 // List of active plugins (in plugins/ directory)
-$config['plugins'] = array("autologon");
+// $config['plugins'] = array("autologon");
 
 # Workaround for issue #5
 $config['drafts_mbox'] = 'INBOX.Drafts';
